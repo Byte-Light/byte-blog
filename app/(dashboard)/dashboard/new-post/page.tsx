@@ -8,14 +8,13 @@ const NewPostPage = () => {
   const [author, setAuthor] = useState<string>("");
   const [publishedAt, setPublishedAt] = useState<string>("");
   const [tags, setTags] = useState<string[]>([]);
-  const [tagInput, setTagInput] = useState<string>(""); // For adding individual tags
+  const [tagInput, setTagInput] = useState<string>("");
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     const newPost = {
-      id: String(Date.now()), // Generate unique ID for the post
+      id: String(Date.now()),
       title,
       content,
       author,
@@ -24,10 +23,8 @@ const NewPostPage = () => {
     };
 
     try {
-      // TODO: Replace with your API call or Firestore integration
       console.log("Post Submitted: ", newPost);
       setSuccessMessage("Post created successfully!");
-      // Clear form fields after submission
       setTitle("");
       setContent("");
       setAuthor("");
@@ -50,18 +47,20 @@ const NewPostPage = () => {
   };
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-semibold mb-6">Create a New Post</h1>
+    <div className="p-4 md:p-8 bg-gray-50 min-h-screen">
+      <h1 className="text-2xl md:text-3xl font-semibold mb-6 text-center md:text-left">
+        Create a New Post
+      </h1>
 
       {successMessage && (
-        <div className="bg-green-100 text-green-700 p-4 rounded mb-6">
+        <div className="bg-green-100 text-green-700 p-4 rounded mb-6 text-center">
           {successMessage}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="space-y-6">
+      <form onSubmit={handleSubmit} className="space-y-6 max-w-xl mx-auto">
         <div>
-          <label htmlFor="title" className="block text-lg font-medium">
+          <label htmlFor="title" className="block text-lg font-medium mb-1">
             Title
           </label>
           <input
@@ -75,7 +74,7 @@ const NewPostPage = () => {
         </div>
 
         <div>
-          <label htmlFor="content" className="block text-lg font-medium">
+          <label htmlFor="content" className="block text-lg font-medium mb-1">
             Content
           </label>
           <textarea
@@ -89,7 +88,7 @@ const NewPostPage = () => {
         </div>
 
         <div>
-          <label htmlFor="author" className="block text-lg font-medium">
+          <label htmlFor="author" className="block text-lg font-medium mb-1">
             Author
           </label>
           <input
@@ -103,7 +102,7 @@ const NewPostPage = () => {
         </div>
 
         <div>
-          <label htmlFor="publishedAt" className="block text-lg font-medium">
+          <label htmlFor="publishedAt" className="block text-lg font-medium mb-1">
             Published Date
           </label>
           <input
@@ -117,8 +116,8 @@ const NewPostPage = () => {
         </div>
 
         <div>
-          <label className="block text-lg font-medium">Tags</label>
-          <div className="flex space-x-2">
+          <label className="block text-lg font-medium mb-1">Tags</label>
+          <div className="flex flex-col sm:flex-row gap-2">
             <input
               type="text"
               value={tagInput}
@@ -129,12 +128,12 @@ const NewPostPage = () => {
             <button
               type="button"
               onClick={handleAddTag}
-              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+              className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
             >
               Add Tag
             </button>
           </div>
-          <div className="mt-2 flex space-x-2">
+          <div className="mt-2 flex flex-wrap gap-2">
             {tags.map((tag) => (
               <div
                 key={tag}
@@ -155,7 +154,7 @@ const NewPostPage = () => {
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-3 rounded hover:bg-blue-600"
+          className="w-full bg-blue-500 text-white p-3 rounded hover:bg-blue-600 transition"
         >
           Create Post
         </button>

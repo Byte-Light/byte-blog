@@ -12,16 +12,18 @@ const data: AnalyticsData[] = [
 ];
 
 const AnalyticsCard: FC = () => (
-  <div className="grid grid-cols-3 gap-4 mt-6">
-    {data.map((item, index) => (
-      <div
-        key={index}
-        className="bg-blue-100 p-5 rounded shadow-md text-center"
-      >
-        <h3 className="text-lg font-semibold">{item.title}</h3>
-        <p className="text-2xl font-bold mt-2">{item.value}</p>
-      </div>
-    ))}
+  <div className="p-4 sm:p-6 md:p-8">
+    <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 mt-6">
+      {data.map((item, index) => (
+        <div
+          key={index}
+          className="bg-blue-100 p-6 rounded shadow-md text-center transition-transform transform hover:scale-105"
+        >
+          <h3 className="text-lg font-semibold text-gray-700">{item.title}</h3>
+          <p className="text-2xl font-bold text-blue-700 mt-2">{item.value}</p>
+        </div>
+      ))}
+    </div>
   </div>
 );
 
